@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Channa Industries - gates, railings, CNC plasma cutting, public art and custom metal fabrication.">
+<title>Channa Industries</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Rubik:wght@400;500;700&display=swap">
+<style>
+/* Layout follows the Davis Fab plasma page: diamond-plate topbar → white header → photo slider → white centred intro → dark diamond-plate 2-col band → white icon grid → photo strip → photo CTA band → brown footer (links / contact / location) → diamond-plate legal strip. */
+:root{
+  --bg:#ffffff;
+  --ink:#2b2523;
+  --ink-2:#5d5553;
+  --line:#e6e2e0;
+  --plate:#352d2c;      /* diamond-plate brown */
+  --plate-2:#2c2524;
+  --plate-ink:#ffffff;
+  --plate-ink-2:#d8d2d0;
+  --blue:#0b5cf5;       /* call-to-action blue, as on the reference */
+  --blue-2:#0848c4;
+  --font-display:"Oswald","Arial Narrow",Arial,sans-serif;
+  --font-body:"Rubik","Helvetica Neue",Arial,sans-serif;
+  --plate-tex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cg fill='none' stroke-linecap='round' stroke-width='3.2'%3E%3Cpath d='M5 13 L13 5' stroke='%23463c3a'/%3E%3Cpath d='M6 14 L14 6' stroke='%23241e1d' stroke-width='1.4'/%3E%3Cpath d='M23 23 L31 31' stroke='%23463c3a'/%3E%3Cpath d='M24 22 L32 30' stroke='%23241e1d' stroke-width='1.4'/%3E%3C/g%3E%3C/svg%3E");
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.65}
+a{color:inherit}
+img,video{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:500;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.plate{background-color:var(--plate);background-image:var(--plate-tex);color:var(--plate-ink)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.todo{background:#fff2c4;color:#5a4200;padding:0 .3em;border-radius:2px}
+.plate .todo,footer .todo,.cta .todo{background:rgba(255,214,90,.22);color:#ffe08a}
+
+/* top bar */
+.topbar .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem 2rem;padding-block:.9rem}
+.topbar .info{font-size:.85rem;font-weight:500;line-height:1.8}
+.socials{display:flex;gap:.5rem}
+.socials a{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;font-size:.75rem;font-weight:700}
+.s-fb{background:#1877f2}.s-ig{background:#d6249f}.s-wa{background:#25a244}.s-gm{background:#4a6cd4}
+.phone-btn{display:inline-flex;align-items:center;gap:.7rem;background:var(--blue);color:#fff;text-decoration:none;padding:.75rem 1.6rem;font-size:1.15rem;font-weight:500}
+.phone-btn:hover{background:var(--blue-2)}
+@media (max-width:760px){.topbar .socials{display:none}.topbar .info{font-size:.78rem}.phone-btn{padding:.6rem 1rem;font-size:1rem}}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#fff}
+header{background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.08);position:sticky;top:env(safe-area-inset-top,0px);z-index:40}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.9rem}
+.logo{display:block;text-decoration:none;flex:none}
+.logo svg{width:200px;height:auto}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:2.2rem;align-items:center}
+nav a{text-decoration:none;font-size:.95rem;font-weight:500;padding:.4rem 0;border-bottom:2px solid transparent;transition:border-color .2s}
+nav a:hover,nav a[aria-current]{border-bottom-color:var(--ink)}
+nav li{position:relative}
+.has-sub > a::after{content:"";display:inline-block;width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-3px);margin-left:.5rem}
+.sub{display:none;position:absolute;top:100%;left:-1rem;background:#fff;box-shadow:0 10px 24px rgba(0,0,0,.12);min-width:200px;padding:.5rem 0;flex-direction:column;gap:0}
+.has-sub:hover .sub,.has-sub:focus-within .sub{display:flex}
+.sub a{display:block;padding:.55rem 1.1rem;border:0}
+.sub a:hover{background:var(--plate);color:#fff}
+.menu-btn{display:none;background:none;border:1.5px solid var(--ink);color:var(--ink);font:inherit;font-weight:500;padding:.45rem .9rem;cursor:pointer}
+@media (max-width:900px){
+  .logo svg{width:160px}
+  .menu-btn{display:block}
+  header .wrap{flex-wrap:wrap}
+  nav{display:none;width:100%}
+  nav.open{display:block}
+  nav ul{flex-direction:column;align-items:stretch;gap:0;padding-block:.5rem}
+  nav a{display:block;padding:.7rem 0;border-bottom:1px solid var(--line)}
+  .sub{display:flex;position:static;box-shadow:none;padding:0 0 0 1rem}
+}
+
+/* floating action buttons */
+.fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));top:42%;z-index:50;display:grid;gap:10px}
+.fab a{width:50px;height:50px;border-radius:50%;background:var(--blue);display:grid;place-items:center;box-shadow:0 6px 16px rgba(11,92,245,.35);transition:transform .2s}
+.fab a:hover{transform:scale(1.08)}
+.fab svg{width:22px;height:22px}
+@media (max-width:600px){.fab{display:none}}
+
+/* photo slider */
+.slider{position:relative;height:clamp(300px,52vw,560px);overflow:hidden;background:var(--plate)}
+.slider figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.2s ease}
+.slider figure.on{opacity:1}
+.slider img{width:100%;height:100%;object-fit:cover}
+.slider figure.on img{animation:kb 7s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.slider::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,15,14,.72) 0%,rgba(20,15,14,.35) 55%,rgba(20,15,14,.1) 100%)}
+.slider .wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;gap:1rem;color:#fff}
+.slider .kick{font-family:var(--font-display);letter-spacing:.3em;text-transform:uppercase;font-size:.95rem;color:#e9e3e1}
+.slider h1{font-size:clamp(2.2rem,5.5vw,4.4rem);text-transform:uppercase;letter-spacing:.04em;max-width:14ch;line-height:1.05}
+.slider .cap{font-size:.9rem;color:#e9e3e1;min-height:1.6em;transition:opacity .4s}
+.slider .btn{align-self:flex-start;margin-top:.4rem}
+.arrows{position:absolute;z-index:3;right:max(16px,env(safe-area-inset-right,0px));bottom:22px;display:flex;gap:8px}
+.arrows button{width:46px;height:46px;border:1.5px solid rgba(255,255,255,.7);background:rgba(0,0,0,.25);color:#fff;font-size:1.3rem;cursor:pointer}
+.arrows button:hover{background:#fff;color:var(--ink)}
+.bar{position:absolute;left:0;bottom:0;height:4px;background:var(--blue);z-index:3;width:0}
+.bar.run{animation:bar 6s linear forwards}
+@keyframes bar{to{width:100%}}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:500;padding:.85rem 1.8rem;border:0;cursor:pointer;font:inherit;font-weight:500}
+.btn:hover{background:var(--blue-2)}
+
+/* intro */
+.intro{padding-block:4.5rem 4rem;text-align:center}
+.intro h2{font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:.18em;text-transform:uppercase;margin-bottom:1.6rem}
+.intro p{text-align:left;max-width:none;font-size:.98rem}
+.intro p a{color:var(--blue);font-weight:500;text-decoration:none}
+
+/* dark band 2-col */
+.band .wrap{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;padding-block:5rem}
+.band h2{font-size:clamp(1.7rem,3vw,2.2rem);text-align:center;margin-bottom:1.2rem}
+.band p{color:var(--plate-ink-2);font-size:1rem}
+.band p + p{margin-top:1rem}
+.band .ph{position:relative;overflow:hidden;min-width:0}
+.band .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:opacity .8s}
+.band .thumbs{display:flex;gap:8px;margin-top:8px}
+.band .thumbs button{all:unset;cursor:pointer;flex:1;opacity:.55;transition:opacity .2s;outline-offset:2px}
+.band .thumbs button.on,.band .thumbs button:hover{opacity:1}
+.band .thumbs img{aspect-ratio:1/1;object-fit:cover;width:100%}
+.band .spec{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+.band .spec span{border:1px solid rgba(255,255,255,.4);padding:.3rem .75rem;font-size:.8rem;letter-spacing:.05em}
+.band.rev .wrap > :first-child{order:2}
+@media (max-width:860px){.band .wrap{grid-template-columns:1fr;gap:2rem;padding-block:3.5rem}.band.rev .wrap > :first-child{order:0}}
+
+/* icon grid */
+.cdm{padding-block:4.5rem}
+.cdm h2{text-align:center;font-size:clamp(1.8rem,3.2vw,2.4rem);margin-bottom:2.4rem}
+.icons{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2rem 1.5rem;max-width:1000px;margin:0 auto}
+.icons a{display:grid;justify-items:center;gap:.7rem;text-decoration:none;text-transform:uppercase;font-size:.95rem;letter-spacing:.03em;padding:.8rem;transition:transform .25s}
+.icons a:hover{transform:translateY(-6px)}
+.icons a:hover svg{color:var(--blue)}
+.icons svg{width:78px;height:74px;color:var(--ink);transition:color .25s}
+.icons .last{grid-column:2}
+@media (max-width:560px){.icons{grid-template-columns:1fr 1fr}.icons .last{grid-column:1 / -1}}
+
+/* photo strip / gallery */
+.gal{padding-block:0 4.5rem}
+.gal h2{text-align:center;font-size:clamp(1.8rem,3.2vw,2.4rem);margin-bottom:.6rem}
+.gal .sub-h{text-align:center;color:var(--ink-2);margin-bottom:1.8rem}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:1.6rem}
+.chips button{font:inherit;font-size:.88rem;padding:.45rem 1.1rem;background:#fff;border:1.5px solid var(--line);cursor:pointer;color:var(--ink)}
+.chips button[aria-pressed="true"]{background:var(--plate);border-color:var(--plate);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;grid-auto-flow:dense;gap:8px}
+.grid button{all:unset;position:relative;overflow:hidden;cursor:zoom-in;background:var(--plate)}
+.grid button.w{grid-column:span 2}
+.grid button.t{grid-row:span 2}
+.grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.grid button:hover img{transform:scale(1.08)}
+.grid button span{position:absolute;inset:auto 0 0 0;padding:1.6rem .8rem .6rem;color:#fff;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;background:linear-gradient(transparent,rgba(0,0,0,.75));transform:translateY(100%);transition:transform .3s}
+.grid button:hover span,.grid button:focus-visible span{transform:none}
+.grid button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.grid button.hide{display:none}
+@media (max-width:860px){.grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}}
+@media (hover:none){.grid button span{transform:none}}
+
+/* video row inside plate band */
+.vids{display:grid;grid-template-columns:1.6fr 1fr;gap:10px}
+.vids video{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10;background:#000}
+@media (max-width:560px){.vids{grid-template-columns:1fr}}
+
+/* lightbox */
+.lb[hidden]{display:none}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(20,15,14,.95);display:grid;place-items:center;padding:16px}
+.lb img{max-height:84vh;max-width:min(1200px,100%);object-fit:contain}
+.lb p{color:#eee;text-align:center;margin-top:.8rem;text-transform:uppercase;letter-spacing:.1em;font-size:.85rem}
+.lb button{position:absolute;width:48px;height:48px;border:0;background:#fff;color:var(--ink);font-size:1.4rem;cursor:pointer}
+.lb .x{top:calc(16px + env(safe-area-inset-top,0px));right:calc(16px + env(safe-area-inset-right,0px))}
+.lb .pv{left:calc(16px + env(safe-area-inset-left,0px));top:50%}
+.lb .nx{right:calc(16px + env(safe-area-inset-right,0px));top:50%}
+
+/* CTA band */
+.cta{position:relative;color:#fff;text-align:center;overflow:hidden}
+.cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta::before{content:"";position:absolute;inset:0;background:rgba(40,28,26,.8);z-index:1}
+.cta .wrap{position:relative;z-index:2;padding-block:4.2rem;display:grid;gap:1rem;justify-items:center}
+.cta h2{font-size:clamp(1.8rem,3.4vw,2.5rem)}
+.cta p{max-width:70ch}
+
+/* footer */
+footer{background:var(--plate-2);color:var(--plate-ink)}
+footer .cols{display:grid;grid-template-columns:1fr 1.1fr 1.1fr;gap:2.5rem;padding-block:4rem}
+footer h4{font-size:1.3rem;text-transform:uppercase;margin-bottom:1.4rem}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:1.15rem}
+footer a{text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .ci{display:grid;gap:.55rem}
+footer .ci b{font-weight:700}
+footer .socials{margin-top:1.2rem}
+.map{display:block;position:relative;aspect-ratio:4/3;max-width:100%;background:#e9e6e3;overflow:hidden;text-decoration:none}
+.map svg{width:100%;height:100%}
+.map span{position:absolute;left:10px;bottom:10px;background:#fff;color:var(--ink);font-size:.8rem;padding:.35rem .7rem;font-weight:500}
+footer .legal{font-size:.78rem;text-align:center;padding-block:1.4rem;border-top:1px solid #4a403e}
+@media (max-width:860px){footer .cols{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+<style>[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<div class="topbar plate">
+  <div class="wrap">
+    <div class="info">
+      <div><span class="todo">[Workshop address, Mohali, Punjab – PIN]</span></div>
+      <div>GSTIN: <span class="todo">[GST number]</span></div>
+    </div>
+    <div class="socials" aria-label="Social media">
+      <a class="s-fb" href="#" aria-label="Facebook">f</a><a class="s-ig" href="#" aria-label="Instagram">ig</a><a class="s-wa" href="#" aria-label="WhatsApp">wa</a><a class="s-gm" href="#" aria-label="Google Maps">G</a>
+    </div>
+    <a class="phone-btn" href="#contact">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>
+      <span class="todo" style="background:rgba(255,255,255,.18);color:#fff">[+91 XXXXX XXXXX]</span>
+    </a>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Channa Industries home">
+      <svg viewBox="0 0 250 64" role="img" aria-label="Channa Industries logo">
+        <rect x="0" y="2" width="60" height="60" fill="#2b2523"/>
+        <path d="M44 18 A18 18 0 1 0 44 46" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square"/>
+        <path d="M40 32 L56 32" stroke="#0b5cf5" stroke-width="4"/>
+        <circle cx="40" cy="32" r="4.5" fill="#ff8a1f"/>
+        <path d="M44 26 l6 -6 M45 38 l6 6 M47 32 l7 0" stroke="#ff8a1f" stroke-width="2" stroke-linecap="round"/>
+        <text x="72" y="34" font-family="Oswald,Arial Narrow,sans-serif" font-size="30" font-weight="600" fill="#2b2523" letter-spacing="1">CHANNA</text>
+        <text x="73" y="55" font-family="Rubik,Arial,sans-serif" font-size="11.5" font-weight="500" fill="#0b5cf5" letter-spacing="3.6">INDUSTRIES</text>
+        <path d="M180 51 H248" stroke="#2b2523" stroke-width="1.2"/>
+      </svg>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+    <nav id="mainNav" aria-label="Main">
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li class="has-sub"><a href="#cnc" aria-current="page">Capabilities</a>
+          <ul class="sub">
+            <li><a href="#cnc">Plasma CNC</a></li>
+            <li><a href="#metalwork">Welding &amp; Metalwork</a></li>
+            <li><a href="#metalwork">Gates &amp; Railings</a></li>
+            <li><a href="#projects">Public Art</a></li>
+          </ul>
+        </li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="fab" aria-label="Quick contact">
+  <a href="#contact" aria-label="Request a quote"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg></a>
+  <a href="#contact" aria-label="Email us"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="5" width="18" height="14"/><path d="m3 6 9 7 9-7"/></svg></a>
+  <a href="#contact" aria-label="Our location"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 22s7-7.2 7-12.5A7 7 0 0 0 5 9.5C5 14.8 12 22 12 22z"/><circle cx="12" cy="9.5" r="2.5"/></svg></a>
+</div>
+
+<main id="top">
+<div class="slider" id="slider">
+  <figure class="on" data-cap="Wood-finish main gate with scroll ironwork"><img src="img/p0465.jpg" alt="Wood-finish main gate with black scroll ironwork"></figure>
+  <figure data-cap="I ♥ Mohali rainbow park installation"><img src="img/p3260.jpg" alt="I love Mohali rainbow installation" loading="lazy"></figure>
+  <figure data-cap="Ornamental iron gate"><img src="img/p0407.jpg" alt="Ornamental iron gate at a residence" loading="lazy"></figure>
+  <figure data-cap="Giant cycle sculpture"><img src="img/p3253.jpg" alt="Giant steel cycle sculpture" loading="lazy"></figure>
+  <div class="wrap">
+    <div class="kick">Channa Industries</div>
+    <h1>Custom Metal Fabrication</h1>
+    <p class="cap" id="sCap">Wood-finish main gate with scroll ironwork</p>
+    <a class="btn" href="#contact">Get a Free Quote</a>
+  </div>
+  <div class="arrows"><button id="sPrev" aria-label="Previous photo">‹</button><button id="sNext" aria-label="Next photo">›</button></div>
+  <div class="bar" id="sBar"></div>
+</div>
+
+<section class="intro" id="about">
+  <div class="wrap">
+    <h2>Quality CNC Plasma Cutting Service</h2>
+    <p>Channa Industries offers CNC plasma cutting and custom metal fabrication for homes, businesses and public spaces. If you have an idea for a design, we can help bring it to life. We have built main gates, railings, yard art, signage, decorative wall art, sculptures, stained glass frames, steel facades and security doors for hundreds of clients. We also offer finishing services, including primer, PU paint, powder coating and wood-finish laminate, so your new design stays protected for years. To learn more about our CNC plasma services, give us a call today at <a href="#contact"><span class="todo">[+91 XXXXX XXXXX]</span></a>.</p>
+  </div>
+</section>
+
+<section class="band plate" id="cnc">
+  <div class="wrap">
+    <div>
+      <h2>CNC Plasma Cutting</h2>
+      <p>Using advanced technology, we can draw your designs or ours. Our CNC plasma machine handles production cutting on full sheets of mild steel, stainless steel and aluminium, from thin decorative panels to heavy base plates.</p>
+      <p>Plasma cutting uses a focused, superheated arc to cut almost any shape in plate or sheet metal quickly and accurately. It is an affordable way to produce lotus motifs, jaali panels, name boards, gate inserts and machine parts, one piece or a thousand.</p>
+      <div class="spec"><span>Bed <span class="todo">[1500 × 3000 mm]</span></span><span>MS up to <span class="todo">[25 mm]</span></span><span>DXF · DWG · PDF · sketch</span></div>
+    </div>
+    <div class="ph">
+      <img id="bandImg" src="img/p4509.jpg" alt="Book-stack sculpture on the CNC plasma table">
+      <div class="thumbs" id="bandThumbs">
+        <button class="on" data-src="img/p4509.jpg" data-alt="Book-stack sculpture on the CNC plasma table" aria-label="Show book sculpture"><img src="img/p4509.jpg" alt=""></button>
+        <button data-src="img/p4477.jpg" data-alt="CNC-cut lotus and mandala motifs" aria-label="Show lotus motifs"><img src="img/p4477.jpg" alt="" loading="lazy"></button>
+        <button data-src="img/p4510.jpg" data-alt="Painted book-stack sculpture" aria-label="Show painted sculpture"><img src="img/p4510.jpg" alt="" loading="lazy"></button>
+        <button data-src="img/p0465.jpg" data-alt="Gate with CNC-cut scroll panels" aria-label="Show gate"><img src="img/p0465.jpg" alt="" loading="lazy"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cdm" id="metalwork">
+  <div class="wrap">
+    <h2>Custom Designed Metalwork</h2>
+    <div class="icons">
+      <a href="#gallery" data-f="gates"><svg viewBox="0 0 80 76" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 74V16M74 74V16M6 74h68M6 26h68M6 66h68"/><path d="M18 26v40M30 26v40M40 26v40M50 26v40M62 26v40"/><path d="M6 16l0-6M18 22l0-12M30 22l0-14M40 22l0-16M50 22l0-14M62 22l0-12M74 16l0-6"/><path d="M14 46c4-8 8-8 8 0s4 8 8 0M50 46c4-8 8-8 8 0s4 8 8 0"/></svg>Gates</a>
+      <a href="#gallery" data-f="art"><svg viewBox="0 0 80 76" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="20" cy="54" r="14"/><circle cx="60" cy="54" r="14"/><path d="M20 54l14-22h18l8 22M34 32l-6-8h-8M52 32l4-10h8M34 32l8 22"/></svg>Yard Art</a>
+      <a href="#gallery" data-f="cnc"><svg viewBox="0 0 80 76" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="68" height="36"/><path d="M20 70V50M60 70V50M14 70h12M54 70h12M16 26h20M16 36h30M50 24l12 16"/></svg>Signs</a>
+      <a href="#gallery" data-f="cnc"><svg viewBox="0 0 80 76" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><rect x="14" y="4" width="52" height="68"/><rect x="22" y="12" width="36" height="52"/><path d="M40 22c-8 8-8 16 0 24 8-8 8-16 0-24zM30 40c6 2 8 6 10 10M50 40c-6 2-8 6-10 10"/></svg>Decorative Wall Art</a>
+      <a href="#gallery" data-f="arch"><svg viewBox="0 0 80 76" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 18h72M4 72h72M8 18v54M72 18v54M18 18v54M26 18v54M34 18v54M40 18v54M46 18v54M54 18v54M62 18v54"/><path d="M4 12h72"/></svg>Railings</a>
+      <a href="#gallery" data-f="arch"><svg viewBox="0 0 80 76" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><rect x="16" y="4" width="48" height="68"/><path d="M16 26h48M16 50h48M32 4v68M48 4v68"/><circle cx="56" cy="40" r="2.5" fill="currentColor"/></svg>Security Doors</a>
+      <a class="last" href="#contact"><svg viewBox="0 0 80 76" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 30a18 18 0 0 1 36 0v6H22z"/><path d="M18 36h44M30 36v6a10 10 0 0 0 20 0v-6M16 74c2-12 12-18 24-18s22 6 24 18"/><path d="M34 14h12"/></svg>And More</a>
+    </div>
+  </div>
+</section>
+
+<section class="gal" id="gallery">
+  <div class="wrap">
+    <h2>Our Work</h2>
+    <p class="sub-h">Gates, art and metalwork from our workshop. Tap any photo to enlarge.</p>
+    <div class="chips" role="group" aria-label="Filter gallery">
+      <button aria-pressed="true" data-f="all">All</button>
+      <button aria-pressed="false" data-f="gates">Gates</button>
+      <button aria-pressed="false" data-f="art">Yard Art &amp; Sculpture</button>
+      <button aria-pressed="false" data-f="arch">Railings, Glass &amp; Facades</button>
+      <button aria-pressed="false" data-f="cnc">CNC Cut &amp; Décor</button>
+    </div>
+    <div class="grid" id="grid">
+      <button class="w t" data-f="gates"><img src="img/p0465.jpg" alt="Wood-finish gate with scroll ironwork" loading="lazy"><span>Wood-finish gate with scroll ironwork</span></button>
+      <button data-f="arch" class="t"><img src="img/p4470.jpg" alt="Stained glass window with Gurbani" loading="lazy"><span>Stained glass window with Gurbani</span></button>
+      <button data-f="cnc" class="t"><img src="img/p4477.jpg" alt="CNC-cut lotus and mandala motifs" loading="lazy"><span>CNC-cut lotus motifs</span></button>
+      <button class="w" data-f="art"><img src="img/p3260.jpg" alt="I love Mohali rainbow installation" loading="lazy"><span>I ♥ Mohali rainbow installation</span></button>
+      <button data-f="gates"><img src="img/p0407.jpg" alt="Ornamental iron gate" loading="lazy"><span>Ornamental iron gate</span></button>
+      <button data-f="art"><img src="img/p3251.jpg" alt="Giant cycle sculpture" loading="lazy"><span>Giant cycle sculpture</span></button>
+      <button data-f="arch" class="t"><img src="img/p4591.jpg" alt="Steel louvre facade" loading="lazy"><span>Steel louvre facade</span></button>
+      <button data-f="cnc" class="t"><img src="img/p4510.jpg" alt="Book-stack sculpture" loading="lazy"><span>Book-stack sculpture</span></button>
+      <button class="w" data-f="gates"><img src="img/p0467.jpg" alt="Flat-top wood-finish gate" loading="lazy"><span>Flat-top wood-finish gate</span></button>
+      <button class="w" data-f="arch"><img src="img/p4469.jpg" alt="Ornamental balcony railing" loading="lazy"><span>Balcony railing</span></button>
+      <button data-f="gates"><img src="img/p0455.jpg" alt="Gate at Gillco House" loading="lazy"><span>Gate at Gillco House</span></button>
+      <button data-f="cnc"><img src="img/p4473.jpg" alt="Tricycle planters" loading="lazy"><span>Tricycle planters</span></button>
+      <button class="w" data-f="art"><img src="img/p3261.jpg" alt="Rainbow wall with tyre seating" loading="lazy"><span>Rainbow wall with tyre seating</span></button>
+      <button data-f="gates" class="t"><img src="img/p0456.jpg" alt="Arched wood-finish gate" loading="lazy"><span>Arched wood-finish gate</span></button>
+      <button data-f="cnc" class="t"><img src="img/p4475.jpg" alt="Cycle planter" loading="lazy"><span>Cycle planter</span></button>
+      <button data-f="art"><img src="img/p3253.jpg" alt="Cycle sculpture with painted tyres" loading="lazy"><span>Cycle sculpture with painted tyres</span></button>
+      <button data-f="arch"><img src="img/p4471.jpg" alt="Steel skylight above stained glass" loading="lazy"><span>Skylight &amp; stained glass</span></button>
+      <button data-f="cnc"><img src="img/p4509.jpg" alt="Book-stack sculpture on CNC table" loading="lazy"><span>On the CNC table</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="band plate rev" id="projects">
+  <div class="wrap">
+    <div>
+      <h2>Recent Projects</h2>
+      <p>From city parks to private homes, our team designs, builds and installs on site. The rainbow selfie point and tyre seating for Mohali, and a full steel louvre facade, are two recent jobs.</p>
+      <p>Every piece is welded, ground, primed and painted or powder coated in our workshop before it leaves.</p>
+    </div>
+    <div class="vids">
+      <video src="img/park.mp4" poster="img/p3260.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Video of the rainbow park installation"></video>
+      <video src="img/facade.mp4" poster="img/p4591.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Video of the steel louvre facade"></video>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <img src="img/p4477.jpg" alt="" loading="lazy">
+  <div class="wrap">
+    <h2>Call Our Professionals Today</h2>
+    <p>Channa Industries can be reached at <b><span class="todo">[+91 XXXXX XXXXX]</span></b>. We can help you with all your CNC plasma cutting and fabrication needs.</p>
+    <a class="btn" href="#contact">Call / WhatsApp Us</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div>
+      <h4>Browse Our Website</h4>
+      <ul><li><a href="#top">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#cnc">Capabilities</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#projects">Projects</a></li><li><a href="#contact">Contact Us</a></li></ul>
+    </div>
+    <div class="ci">
+      <h4>Contact Information</h4>
+      <div>Phone: <b><span class="todo">[+91 XXXXX XXXXX]</span></b></div>
+      <div>Email: <b><span class="todo">[info@channaindustries.com]</span></b></div>
+      <div>Address: <span class="todo">[Workshop address, Mohali, Punjab]</span></div>
+      <div>Business Hours:</div>
+      <div>Monday – Saturday: <span class="todo">[9:00 am – 7:00 pm]</span></div>
+      <div>Sunday: Closed</div>
+      <div>GSTIN: <span class="todo">[GST number]</span></div>
+      <div class="socials"><a class="s-fb" href="#" aria-label="Facebook">f</a><a class="s-ig" href="#" aria-label="Instagram">ig</a><a class="s-wa" href="#" aria-label="WhatsApp">wa</a><a class="s-gm" href="#" aria-label="Google Maps">G</a></div>
+    </div>
+    <div>
+      <h4>Our Location</h4>
+      <a class="map" href="https://www.google.com/maps/search/Mohali,+Punjab" aria-label="Open location in Google Maps">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="400" height="300" fill="#ece8e4"/>
+          <path d="M-10 210 C 90 190, 160 230, 410 170" stroke="#f3c64a" stroke-width="10" fill="none"/>
+          <path d="M120 -10 L 160 310" stroke="#fff" stroke-width="8"/><path d="M-10 90 H 410" stroke="#fff" stroke-width="7"/>
+          <path d="M260 -10 L 240 310" stroke="#fff" stroke-width="6"/><path d="M-10 250 H 410" stroke="#fff" stroke-width="5"/>
+          <rect x="175" y="110" width="50" height="40" fill="#d9e6cf"/><rect x="40" y="120" width="60" height="50" fill="#d9e6cf"/>
+          <path d="M200 100 c-14 0-24 10-24 24 0 18 24 42 24 42s24-24 24-42c0-14-10-24-24-24z" fill="#0b5cf5"/><circle cx="200" cy="124" r="8" fill="#fff"/>
+        </svg>
+        <span>Open in Google Maps</span>
+      </a>
+    </div>
+  </div>
+  <div class="legal plate"><div class="wrap">© 2026 Channa Industries. Content, including images, displayed on this website is protected by copyright laws. Terms of Use | Privacy Policy</div></div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="lbX" aria-label="Close">×</button>
+  <button class="pv" id="lbP" aria-label="Previous photo">‹</button>
+  <div><img id="lbImg" alt=""><p id="lbCap"></p></div>
+  <button class="nx" id="lbN" aria-label="Next photo">›</button>
+</div>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mb=document.getElementById('menuBtn'),nav=document.getElementById('mainNav');
+  mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o);mb.textContent=o?'Close':'Menu';});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A'&&nav.classList.contains('open')){nav.classList.remove('open');mb.textContent='Menu';mb.setAttribute('aria-expanded','false');}});
+
+  // slider
+  var figs=[].slice.call(document.querySelectorAll('#slider figure')),cap=document.getElementById('sCap'),bar=document.getElementById('sBar'),i=0,t;
+  function go(k){figs[i].classList.remove('on');i=(k+figs.length)%figs.length;figs[i].classList.add('on');cap.textContent=figs[i].dataset.cap;run();}
+  function run(){clearTimeout(t);if(reduce)return;bar.classList.remove('run');void bar.offsetWidth;bar.classList.add('run');t=setTimeout(function(){go(i+1);},6000);}
+  document.getElementById('sPrev').onclick=function(){go(i-1);};
+  document.getElementById('sNext').onclick=function(){go(i+1);};
+  run();
+
+  // band thumbnails
+  var bi=document.getElementById('bandImg');
+  document.querySelectorAll('#bandThumbs button').forEach(function(b){b.onclick=function(){document.querySelectorAll('#bandThumbs button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');bi.src=b.dataset.src;bi.alt=b.dataset.alt;};});
+
+  // gallery filter
+  var chips=document.querySelectorAll('.chips button'),items=[].slice.call(document.querySelectorAll('#grid button'));
+  function filter(f){chips.forEach(function(c){c.setAttribute('aria-pressed',c.dataset.f===f);});items.forEach(function(it){it.classList.toggle('hide',f!=='all'&&it.dataset.f!==f);});}
+  chips.forEach(function(c){c.onclick=function(){filter(c.dataset.f);};});
+  document.querySelectorAll('.icons a[data-f]').forEach(function(a){a.addEventListener('click',function(){filter(a.dataset.f);});});
+
+  // lightbox
+  var lb=document.getElementById('lb'),li=document.getElementById('lbImg'),lc=document.getElementById('lbCap'),cur=0,last;
+  function vis(){return items.filter(function(x){return !x.classList.contains('hide');});}
+  function show(k){var v=vis();cur=(k+v.length)%v.length;var im=v[cur].querySelector('img');li.src=im.src;li.alt=im.alt;lc.textContent=im.alt;}
+  items.forEach(function(it){it.onclick=function(){last=it;show(vis().indexOf(it));lb.hidden=false;document.getElementById('lbX').focus();};});
+  function close(){lb.hidden=true;if(last)last.focus();}
+  document.getElementById('lbX').onclick=close;
+  document.getElementById('lbP').onclick=function(){show(cur-1);};
+  document.getElementById('lbN').onclick=function(){show(cur+1);};
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1);});
+})();
+</script>
+
+</body>
+</html>
